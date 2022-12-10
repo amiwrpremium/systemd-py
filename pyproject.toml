@@ -1,10 +1,23 @@
 [tool.poetry]
 name = "systemd-py"
-version = "0.1.1"
-description = ""
+version = "0.1.2"
+description = "systemd-py is a library which helps you to create systemd services in python."
 authors = ["amiwrpremium <amiwrpremium@gmail.com>"]
 readme = "README.md"
+license = "MIT"
 packages = [{include = "systemd_py"}]
+homepage = "https://amiwrpremium.github.io/systemd-py/"
+repository = "https://github.com/amiwrpremium/systemd-py"
+documentation = "https://amiwrpremium.github.io/systemd-py/"
+keywords = ["systemd", "service", "unit", "python", "service unit", "systemd unit", "service file", "systemd service"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
