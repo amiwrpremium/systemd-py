@@ -45,8 +45,9 @@ class ServiceBuilder(_Builder):
         """
 
         return [
-            '_pid_file', '_bus_name', '_notify_access', '_exec_start_pre',
-            '_exec_start_post', '_exec_reload', '_exec_stop_post'
+            "_type", "_remain_after_exit", "_pid_file", "_bus_name", "_notify_access",
+            "_exec_start", "_exec_start_pre", "_exec_start_post", "_exec_reload", "_exec_stop",
+            "_exec_stop_post", "_restart_sec", "_restart", "_timeout_sec",
         ]
 
     def __init__(self):
