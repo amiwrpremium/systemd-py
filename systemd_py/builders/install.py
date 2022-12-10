@@ -1,5 +1,6 @@
 """
-# Install Builder
+# Install Builder 🏗️
+Builder for the `install` section of a systemd service file.
 """
 
 from typing import Optional
