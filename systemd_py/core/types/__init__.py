@@ -1,5 +1,5 @@
 """
-# Types for systemdpy
+# Types for systemd_py
 """
 
 from ._types import TypeType

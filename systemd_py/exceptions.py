@@ -1,2 +1,2 @@
 class SystemdPyError(Exception):
-    """Base class for all exceptions raised by systemdpy."""
+    """Base class for all exceptions raised by systemd_py."""

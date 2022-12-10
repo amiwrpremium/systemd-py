@@ -1,5 +1,5 @@
 """
-# Builders for systemdpy
+# Builders for systemd_py
 """
 
 from .install import InstallBuilder

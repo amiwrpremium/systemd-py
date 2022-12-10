@@ -1,5 +1,5 @@
 """
-# Models for systemdpy
+# Models for systemd_py
 """
 
 from ._models import Section

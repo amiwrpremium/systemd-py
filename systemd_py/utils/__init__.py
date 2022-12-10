@@ -1,3 +1,3 @@
 """
-Utilities for systemdpy
+Utilities for systemd_py
 """
