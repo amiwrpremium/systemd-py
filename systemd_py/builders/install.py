@@ -34,7 +34,7 @@ class InstallBuilder(_Builder):
         """
 
         return [
-            'wanted_by', 'required_by', 'alias', 'also', 'default_instance'
+            '_wanted_by', '_required_by', '_alias', '_also', '_default_instance'
         ]
 
     def build(self) -> Install:
