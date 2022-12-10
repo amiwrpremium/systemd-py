@@ -18,8 +18,8 @@ TypeType = Union[
 RestartType = Union[
     Restart,
     Literal["no"],
-    Literal["on_failure"],
-    Literal["on_abnormal"],
-    Literal["on_watchdog"],
-    Literal["on_abort"]
+    Literal["on_failure", "on-failure"],
+    Literal["on_abnormal", "on-abnormal"],
+    Literal["on_watchdog", "on-watchdog"],
+    Literal["on_abort", "on-abort"],
 ]
