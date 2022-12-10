@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import List, Union, Optional, Dict
 from pydantic import BaseModel
 from pydantic import Field
@@ -29,6 +30,8 @@ class Section(BaseModel):
             raise SystemdPyError(f'{self.__class__.__name__} value cannot be None')
         elif isinstance(value, dict):
             raise SystemdPyError(f'{self.__class__.__name__} does not support dict')
+        if isinstance(value, Enum):
+            return str(value.value)
         else:
             return str(value)
 
