@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "systemd-py"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["amiwrpremium <amiwrpremium@gmail.com>"]
 readme = "README.md"
