@@ -1,4 +1,4 @@
-# Install Builder Example
+# Unit Builder Example
 
 This example shows how to use the `UnitBuilder` to create unit file `[Unit]` section.
 

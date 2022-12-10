@@ -1,4 +1,4 @@
-# Install Builder Example
+# Socket Builder Example
 
 This example shows how to use the `SocketBuilder` to create unit file `[Socket]` section.
 
