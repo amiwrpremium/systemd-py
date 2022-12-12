@@ -2,15 +2,37 @@ from enum import Enum
 from typing import List, Union, Optional, Dict
 from pydantic import BaseModel
 from pydantic import Field
+from pydantic import root_validator
 from pydantic.main import ModelMetaclass  # noqa
 
 from ...exceptions import SystemdPyError
+
+
+EmptyValues = (None, '', [], (), {}, ..., Ellipsis)
 
 
 class Section(BaseModel):
     """
     Systemd Section
     """
+
+    @root_validator(pre=True)
+    def _remove_empty(cls, values):
+        for k, v in values.copy().items():
+            if v in EmptyValues:
+                values.pop(k)
+            if isinstance(v, dict):
+                for k2, v2 in v.copy().items():
+                    if v2 in EmptyValues:
+                        v.pop(k2)
+            if isinstance(v, list):
+                for i in v.copy():
+                    if i in EmptyValues:
+                        v.remove(i)
+            if isinstance(v, str):
+                if v.isspace():
+                    values.pop(k)
+        return values
 
     extra: Optional[Dict[str, str]] = Field(
         None,
@@ -124,7 +146,7 @@ class Section(BaseModel):
         extra = dict_.pop('Extra', None)
 
         for k, v in dict_.copy().items():
-            if v in (None, '', [], (), {}, ..., Ellipsis):
+            if v in EmptyValues:
                 dict_.pop(k)
                 continue
             dict_[k] = self._to_str(v)
