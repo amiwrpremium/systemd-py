@@ -13,3 +13,5 @@ from .builders import InstallBuilder
 from .builders import ServiceBuilder
 from .builders import SocketBuilder
 from .builders import UnitBuilder
+
+from .interactive import SimpleBuilder as InteractiveSimpleBuilder
