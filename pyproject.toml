@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "systemd-py"
-version = "0.2.0"
+version = "0.3.0"
 description = "systemd-py is a library which helps you to create systemd services in python."
 authors = ["amiwrpremium <amiwrpremium@gmail.com>"]
 readme = "README.md"
