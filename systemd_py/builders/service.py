@@ -31,7 +31,10 @@ class ServiceBuilder(_Builder):
         '_exec_stop_post',
         '_restart_sec',
         '_restart',
-        '_timeout_sec'
+        '_timeout_sec',
+        '_user',
+        '_group',
+        '_nice'
     )
 
     @property
@@ -47,7 +50,8 @@ class ServiceBuilder(_Builder):
         return [
             "_type", "_remain_after_exit", "_pid_file", "_bus_name", "_notify_access",
             "_exec_start", "_exec_start_pre", "_exec_start_post", "_exec_reload", "_exec_stop",
-            "_exec_stop_post", "_restart_sec", "_restart", "_timeout_sec",
+            "_exec_stop_post", "_restart_sec", "_restart", "_timeout_sec", "_user", "_group",
+            "_nice"
         ]
 
     def __init__(self):
@@ -65,6 +69,9 @@ class ServiceBuilder(_Builder):
         self._restart_sec: Optional[int] = None
         self._restart: Optional[RestartType] = None
         self._timeout_sec: Optional[int] = None
+        self._user: Optional[str] = None
+        self._group: Optional[str] = None
+        self._nice: Optional[int] = None
 
     def build(self) -> Service:
         """
@@ -89,7 +96,10 @@ class ServiceBuilder(_Builder):
             exec_stop_post=self._exec_stop_post,
             restart_sec=self._restart_sec,
             restart=self._restart,
-            timeout_sec=self._timeout_sec
+            timeout_sec=self._timeout_sec,
+            user=self._user,
+            group=self._group,
+            nice=self._nice
         )
 
     def with_type(self, type: TypeType) -> 'ServiceBuilder':
@@ -286,4 +296,46 @@ class ServiceBuilder(_Builder):
         """
 
         self._timeout_sec = timeout_sec
+        return self
+
+    def with_user(self, user: str) -> 'ServiceBuilder':
+        """
+        Sets the `user` field of the `service` section of a systemd service file.
+
+        :param user: The `user` field of the `service` section of a systemd service file
+        :type user: str
+
+        :return: The `ServiceBuilder` object
+        :rtype: ServiceBuilder
+        """
+
+        self._user = user
+        return self
+
+    def with_group(self, group: str) -> 'ServiceBuilder':
+        """
+        Sets the `group` field of the `service` section of a systemd service file.
+
+        :param group: The `group` field of the `service` section of a systemd service file
+        :type group: str
+
+        :return: The `ServiceBuilder` object
+        :rtype: ServiceBuilder
+        """
+
+        self._group = group
+        return self
+
+    def with_nice(self, nice: int) -> 'ServiceBuilder':
+        """
+        Sets the `nice` field of the `service` section of a systemd service file.
+
+        :param nice: The `nice` field of the `service` section of a systemd service file
+        :type nice: int
+
+        :return: The `ServiceBuilder` object
+        :rtype: ServiceBuilder
+        """
+
+        self._nice = nice
         return self
