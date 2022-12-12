@@ -37,7 +37,7 @@ class Section(BaseModel):
             return str(value)
 
     @staticmethod
-    def load_from_string(text: str, model: ModelMetaclass = None) -> 'Section':
+    def load_from_string(text: str, *, model: Optional[Union[str, ModelMetaclass]] = None) -> 'Section':
         """
         Load Section from string
 
@@ -70,8 +70,18 @@ class Section(BaseModel):
             'extra': {}
         }
 
-        if model is None:
+        if isinstance(model, ModelMetaclass):
+            model = model
+        else:
             import importlib
+
+            if isinstance(model, str):
+                _ = model.capitalize()
+            elif model is None:
+                _ = section_name
+            else:
+                raise SystemdPyError(f'Invalid model: {model}')
+
             try:
                 model = getattr(importlib.import_module('systemd_py.core.models'), section_name)
             except AttributeError as e:
@@ -79,6 +89,7 @@ class Section(BaseModel):
 
         for line in text.splitlines():
             if not line.strip().startswith('#'):
+                line = line.strip()
                 k, v = line.split('=', 1)
                 k = ''.join(['_' + i.lower() if i.isupper() else i for i in k]).lstrip('_')
                 v = v.strip()
