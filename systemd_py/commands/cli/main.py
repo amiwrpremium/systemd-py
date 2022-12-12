@@ -51,7 +51,7 @@ def generate(
 
     sysd = Systemd(name, [unit, service, install])
 
-    print("\n\n", sysd, "\n\n")
+    print(f"\n\n{sysd}\n\n")
 
     if save:
         sysd.save_in_os()
@@ -59,7 +59,7 @@ def generate(
             sysd.daemon.reload()
 
         if enable:
-            sysd.daemon.enable(sysd)
+            sysd.daemon.enable()
 
         if start:
-            sysd.daemon.start(sysd)
+            sysd.daemon.start()
