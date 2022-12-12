@@ -2,6 +2,7 @@ from enum import Enum
 from typing import List, Union, Optional, Dict
 from pydantic import BaseModel
 from pydantic import Field
+from pydantic.main import ModelMetaclass  # noqa
 
 from ...exceptions import SystemdPyError
 
@@ -34,6 +35,59 @@ class Section(BaseModel):
             return str(value.value)
         else:
             return str(value)
+
+    @staticmethod
+    def load_from_string(text: str, model: ModelMetaclass = None) -> 'Section':
+        if not text.strip().startswith('['):
+            raise SystemdPyError(f'Invalid section: {text}')
+
+        section_name = text.split('[')[1].split(']')[0]
+
+        text = text.strip()
+        text = text[text.find('['):]
+        text = text[text.find(']')+1:]
+        text = text.strip()
+
+        if not text:
+            raise SystemdPyError(f'Invalid section: {text}')
+
+        props = {
+            'extra': {}
+        }
+
+        if model is None:
+            import importlib
+            try:
+                model = getattr(importlib.import_module('systemd_py.core.models'), section_name)
+            except AttributeError as e:
+                raise SystemdPyError(f'Invalid section: {text}') from e
+
+        for line in text.splitlines():
+            if not line.strip().startswith('#'):
+                k, v = line.split('=', 1)
+                k = ''.join(['_' + i.lower() if i.isupper() else i for i in k]).lstrip('_')
+                v = v.strip()
+                if v.startswith('"') and v.endswith('"'):
+                    v = v[1:-1]
+                if v.startswith("'") and v.endswith("'"):
+                    v = v[1:-1]
+                if v.startswith('[') and v.endswith(']'):
+                    v = v[1:-1].split()
+                if v.lower() == 'true':
+                    v = True
+                elif v.lower() == 'false':
+                    v = False
+                elif v.isdigit():
+                    v = int(v)
+                elif v.replace('.', '', 1).isdigit():
+                    v = float(v)
+
+                if k in model.__fields__:
+                    props[k] = v
+                else:
+                    props['extra'].update({k: v})
+
+        return model(**props)
 
     def __str__(self):
         if all(getattr(self, s) is None for s in self.__fields__):
