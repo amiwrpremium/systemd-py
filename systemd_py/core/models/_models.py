@@ -129,7 +129,7 @@ class Section(BaseModel):
                 continue
             dict_[k] = self._to_str(v)
 
-        text += "\n".join([f'{k}={v!r}' for k, v in dict_.items()])
+        text += "\n".join([f'{k}={v}' for k, v in dict_.items()])
 
         if extra:
             for k, v in extra.items():
