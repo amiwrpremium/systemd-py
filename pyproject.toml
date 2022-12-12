@@ -19,6 +19,9 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
+[tool.poetry.scripts]
+systemd-py = "systemd_py.commands.main:app"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 pydantic = "^1.10.2"
@@ -30,6 +33,7 @@ mkdocs-git-committers-plugin-2 = "^1.1.1"
 mkdocs-gen-files = "^0.4.0"
 mkdocs-literate-nav = "^0.5.0"
 mkdocs-section-index = "^0.3.4"
+typer = {extras = ["all"], version = "^0.7.0"}
 
 
 [build-system]
