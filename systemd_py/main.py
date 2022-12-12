@@ -35,7 +35,9 @@ class Systemd:
         """
 
         header = f'# {self._name}.service\n\n'
-        sections = "\n\n".join([str(s) for s in self._sections])
+        sections = "\n\n".join(
+            [str(s) for s in self._sections if str(s) != '' and str(s) is not None and not str(s).isspace()]
+        )
         footer = f"\n\n# Via systemd_py"
 
         self._service = header + sections + footer
