@@ -10,8 +10,8 @@ class Daemon:
         """
         Systemd daemon
 
-        Args:
-            name (str, required): daemon name
+        :param name: Name of the systemd daemon
+        :type name: str
         """
 
         self._name = name

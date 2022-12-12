@@ -185,11 +185,11 @@ class Section(BaseModel):
             """
             Convert to CamelCase
 
-            Args:
-                string (str, required): String to convert
+            :param string: String to convert
+            :type string: str
 
-            Returns:
-                str: CamelCase string
+            :return: CamelCase string
+            :rtype: str
             """
 
             return ''.join(word.capitalize() for word in string.split('_'))

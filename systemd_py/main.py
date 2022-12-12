@@ -14,9 +14,11 @@ class Systemd:
         """
         Create systemd service file
 
-        Args:
-            name (str, required): service name
-            sections (List[Section], required): list of sections
+        :param name: Name of the systemd service
+        :type name: str
+
+        :param sections: List of sections
+        :type sections: List[Section]
         """
 
         self._name = name
@@ -30,8 +32,8 @@ class Systemd:
         """
         Build systemd service file
 
-        Returns:
-            str: systemd unit file
+        :return: systemd service file
+        :rtype: str
         """
 
         header = f'# {self._name}.service\n\n'
@@ -48,11 +50,11 @@ class Systemd:
         """
         Save systemd service file
 
-        Args:
-            path (str, required): path to save file
+        :param path: Path to save systemd service file
+        :type path: str
 
-        Returns:
-            None
+        :return: None
+        :rtype: None
         """
 
         if self._service is None:
@@ -69,8 +71,8 @@ class Systemd:
         """
         Save systemd service file in /etc/systemd/system
 
-        Returns:
-            None
+        :return: None
+        :rtype: None
         """
 
         self.save('/etc/systemd/system')
@@ -79,8 +81,8 @@ class Systemd:
         """
         Start service
 
-        Returns:
-            None
+        :return: None
+        :rtype: None
         """
 
         self.daemon.reload()
