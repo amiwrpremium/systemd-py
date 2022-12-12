@@ -39,11 +39,14 @@ class Section(BaseModel):
         if all(getattr(self, s) is None for s in self.__fields__):
             raise SystemdPyError(f'{self.__class__.__name__} is empty')
 
-        text = f'[{self.__class__.__name__}]\n'
+        text = ""
         dict_ = self.dict(by_alias=True, exclude_none=True)
-
         extra = dict_.pop('Extra', None)
-        for k, v in dict_.items():
+
+        for k, v in dict_.copy().items():
+            if v in (None, '', [], (), {}, ..., Ellipsis):
+                dict_.pop(k)
+                continue
             dict_[k] = self._to_str(v)
 
         text += "\n".join([f'{k}={v!r}' for k, v in dict_.items()])
@@ -52,13 +55,20 @@ class Section(BaseModel):
             for k, v in extra.items():
                 text += f'\n{k}={v}'
 
-        return text
+        text = text.strip()
+
+        if text and not text.isspace():
+            return f'[{self.__class__.__name__}]\n{text}'
+
+        return ''
 
     def __repr__(self):
         return self.__str__()
 
     def __add__(self, other):
         if isinstance(other, Section):
+            if other.__str__().strip().isspace() or other.__str__() == '':
+                return self
             return self.__str__() + "\n\n" + other.__str__()
         return TypeError(f'unsupported operand type(s) for +: {self.__class__.__name__} and {other.__class__.__name__}')
 
