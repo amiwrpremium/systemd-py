@@ -5,6 +5,7 @@ Builder for the `install` section of a systemd service file.
 
 from typing import Optional
 from typing import List
+from typing import Union
 
 from ._builder import _Builder
 from ..core.models import Install
@@ -61,7 +62,7 @@ class InstallBuilder(_Builder):
         self._also: Optional[List[str]] = None
         self._default_instance: Optional[str] = None
 
-    def with_wanted_by(self, wanted_by: List[str]) -> 'InstallBuilder':
+    def with_wanted_by(self, wanted_by: Union[str, List[str]]) -> 'InstallBuilder':
         """
         Sets the `wanted_by` field of the `install` section of a systemd service file.
 
@@ -75,7 +76,7 @@ class InstallBuilder(_Builder):
         self._wanted_by = wanted_by
         return self
 
-    def with_required_by(self, required_by: List[str]) -> 'InstallBuilder':
+    def with_required_by(self, required_by: Union[str, List[str]]) -> 'InstallBuilder':
         """
         Sets the `required_by` field of the `install` section of a systemd service file.
 
@@ -89,7 +90,7 @@ class InstallBuilder(_Builder):
         self._required_by = required_by
         return self
 
-    def with_alias(self, alias: List[str]) -> 'InstallBuilder':
+    def with_alias(self, alias: Union[str, List[str]]) -> 'InstallBuilder':
         """
         Sets the `alias` field of the `install` section of a systemd service file.
 
@@ -103,7 +104,7 @@ class InstallBuilder(_Builder):
         self._alias = alias
         return self
 
-    def with_also(self, also: List[str]) -> 'InstallBuilder':
+    def with_also(self, also: Union[str, List[str]]) -> 'InstallBuilder':
         """
         Sets the `also` field of the `install` section of a systemd service file.
 
