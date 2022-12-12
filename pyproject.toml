@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "systemd-py"
-version = "0.3.1"
+version = "0.3.2"
 description = "systemd-py is a library which helps you to create systemd services in python."
 authors = ["amiwrpremium <amiwrpremium@gmail.com>"]
 readme = "README.md"
@@ -23,7 +23,7 @@ classifiers = [
 systemd-py = "systemd_py.commands.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 pydantic = "^1.10.2"
 mkdocs = "^1.4.2"
 mkdocs-material = "^8.5.11"
