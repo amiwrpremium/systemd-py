@@ -38,6 +38,21 @@ class Section(BaseModel):
 
     @staticmethod
     def load_from_string(text: str, model: ModelMetaclass = None) -> 'Section':
+        """
+        Load Section from string
+
+        :param text: Service text to load
+        :type text: str
+
+        :param model: Model to load
+        :type model: ModelMetaclass
+
+        :return: Section
+        :rtype: Section
+
+        :raise SystemdPyError: If text is not valid
+        """
+
         if not text.strip().startswith('['):
             raise SystemdPyError(f'Invalid section: {text}')
 
